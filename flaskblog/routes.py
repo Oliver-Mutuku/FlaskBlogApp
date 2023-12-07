@@ -1,9 +1,7 @@
-from flask import Flask, render_template, url_for, flash, redirect
-app = Flask(__name__)
-from forms import RegistrationForm, LogInForm
-from email_validator import validate_email, EmailNotValidError
-
-app.config['SECRET_KEY'] = '4a95a87d5b0f3af5855f9cc161de54f2'
+from flask import render_template, url_for, flash, redirect
+from flaskblog.models import User, Post
+from flaskblog.forms import RegistrationForm, LogInForm
+from flaskblog import app
 
 
 posts = [
@@ -53,7 +51,3 @@ def login():
         else:
             flash(f'Login unsuccessful. Please check email and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
